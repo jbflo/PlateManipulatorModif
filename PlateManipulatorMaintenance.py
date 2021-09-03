@@ -37,8 +37,10 @@ class PlateManipulatorMaintenance(Equipment):
         """
         return self._sc.move_to_crystal_position()
     
-    def _change_location(self, args):
-        self._sc.change_location(args)
+
+    def _do_change_mode(self, args):
+        self._sc._do_change_mode(args)
+
     
     def _get_scan_limits(self, args):
         """
@@ -98,8 +100,6 @@ class PlateManipulatorMaintenance(Equipment):
 
         return cmd_list
 
-
-
     def send_command(self, cmdname, args=None):
         if cmdname in ["getOmegaMotorDynamicScanLimits"]:
             self._get_scan_limits(args)
@@ -107,6 +107,6 @@ class PlateManipulatorMaintenance(Equipment):
             self._move_to_crystal_position()
         if cmdname == "abort":
             self._do_abort()
-        if cmdname == "change_plate_x_y_location":
-            self._change_location()    
+        # if cmdname == "change_mode":
+        #     self._do_change_mode(args)      
         return True
